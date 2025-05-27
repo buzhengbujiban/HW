@@ -1,0 +1,57 @@
+@tf.function
+def get_hidden(X_test):
+    return model(tf.convert_to_tensor(X_test), get_hidden=True, training=False)
+
+hidden_cols = [f'hidden_{i}' for i in range(hidden_dim)]
+factor_all_df[valid_time_mask, hidden_cols] = get_hidden(test_df[valid_time_mask, features]).numpy()
+
+factor_all_df[valid_time_mask, labels + 'pred'] = model.predict(factor_all_df[valid_time_mask, features+hidden_cols])
+
+
+
+
+
+train_df[zero_mask_train, hidden_cols] = get_hidden(X_train).numpy()
+X_train = train_df[zero_mask_train, features + hidden_cols]
+
+model = {}
+
+
+bid_ask_spread
+
+
+是否比之前需要的Expected风险更高，
+流动性 ： abs(ret) / vol
+
+bid_ask_vol_imb, diff
+
+
+adjusted_return
+
+
+
+market_Milliq = (ret1.abs()/ vol)
+market_Milliq_zsc = ( market_Milliq - market_Milliq.rolling(21, min_periods=21).mean() ) / market_Milliq.rolling(21, min_periods=21).std() 
+market_Milliq_avg = market_Milliq.rolling(10, min_periods=10).mean() 
+market_Milliq_std =  market_Milliq.rolling(5, min_periods=5).mean() 
+market_Milliq_std_zsc =( market_Milliq_std - market_Milliq_std.rolling(21, min_periods=21).mean() ) / market_Milliq_std.rolling(21, min_periods=21).std() 
+df['market_Milliq_avg'] = market_Milliq_avg.stack(dropna=False).fillna(0)[flatten_mask]
+df['market_Milliq_std_zsc'] = market_Milliq_std_zsc.stack(dropna=False).fillna(0)[flatten_mask]
+df['market_Milliq_zsc'] = market_Milliq_zsc.stack(dropna=False).fillna(0)[flatten_mask]
+
+
+
+
+df['bid_ask_spread'] = spread.stack(dropna=False).fillna(0)[flatten_mask]
+ask_profit,  bid_profit,  mid_profit
+
+
+
+
+风险调整后开盘跳空幅度
+
+
+risk_adjust
+
+
+风险调整后日内涨幅
