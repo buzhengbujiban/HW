@@ -1,0 +1,71 @@
+我现在有逐笔trades 和相应最邻近的5档book depth数据， 请你帮我撰写代码，提取出trade amount 高于过去500个tick的trade avg * 1.5 的 trade 条目定义为大主动卖/买trade，并分别针对主动卖/买 trade条目，利用其后50个tick的条目数据，计算在大买/卖trade发生后 50个tick，
+
+1.市场的imbalance， 五档加权imb的 avg  ,
+2.imbalance， 五档加权imb与 1..50序列的 slope, 
+3.大trade 价格处前2个挡位的增加量/减少量，后2个挡位的增加量/减少量
+4.后50个trade tick 的amount的mean，std 指标, 后面第50个tick相对成交价格的return。后面50个tick价格的std
+
+
+我有的数据columns如下：
+timestamp	avg_price_-5	avg_price_-4	avg_price_-3	avg_price_-2	avg_price_-1	avg_price_1	avg_price_2	avg_price_3	avg_price_4	avg_price_5	discrete_depth_-5	discrete_depth_-4	discrete_depth_-3	discrete_depth_-2	discrete_depth_-1	discrete_depth_1	discrete_depth_2	discrete_depth_3	discrete_depth_4	discrete_depth_5	discrete_notional_-5	discrete_notional_-4	discrete_notional_-3	discrete_notional_-2	discrete_notional_-1	discrete_notional_1	discrete_notional_2	discrete_notional_3	discrete_notional_4	discrete_notional_5 
+分别表示五档订单簿的价格/量
+active_trade_direct	price	quantity	have_buyer_maker
+分别表示逐笔trade的主动方向和价格量信息，以及有无maker参与
+
+请你帮我撰写python代码完成上述1-4因子的计算。
+
+
+
+
+定义订单簿中 买1 卖1价格变化超过一个ticksize(0.01)的位置极为事件3
+
+
+
+计算事件3发生时： 买1量，卖1量，(BS1-AS1)/(BS1+AS1) , 未来1min ret,  该订单的存续时间(orderlifetime)， 未来1min同方向新增订单量，对手方新增订单量， 未来1min的成交量/成交金额。以及事件触发记作1否则为0的Dummy
+将上述指标按照：买方触发事件1为正，卖方触发事件1为负的原则，分别求围绕该事件的5min ewm_decay, 并把时间戳记作该事件后1min的时间戳（防止fowardlook）。
+请你帮我完成上述计算高频因子的python代码
+
+
+
+我的L3数据如下：
+ts	datetime	OrderID	px	sz	side	Msg	Orderlifttime	askpx1	bidpx1	askamt1	askvol1	askpx2	askamt2	askvol2	askpx3	askamt3	askvol3	askpx4	askamt4	askvol4	askpx5	askamt5	askvol5	bidamt1	bidvol1	bidpx2	bidamt2	bidvol2	bidpx3	bidamt3	bidvol3	bidpx4	bidamt4	bidvol4	bidpx5	bidamt5	bidvol5
+1.75311E+12	48:13.6				side=B,S	Msg=Trd, Add, Del, Replace		192.6	192.59	206891	5	192.62	582	6	192.63	1649	7	192.64	1107	8	192.65	1331	8	1663	8	192.58	590	5	192.57	1751	7	192.56	4937	13	192.55	2099	12
+1.75311E+12	48:24.5							192.6	192.59	201546	5	192.62	330	4	192.63	592	3	192.64	822	6	192.65	1672	9	1304	10	192.58	1201	8	192.57	1186	6	192.56	3067	13	192.55	6935	16
+1.75311E+12	48:35.2							192.6	192.59	198466	4	192.62	89	3	192.64	205	3	192.65	896	5	192.66	1478	8	7812	24	192.58	1424	7	192.57	2122	7	192.56	2312	9	192.55	3559	14
+
+请你给出简洁正确的python代码
+
+
+定义订单簿中 买一卖一价格上的订单量为5挡订单中的最高值时候记作事件2
+
+计算事件2发生时： 买1量，卖1量，(BS1-AS1)/(BS1+AS1) , 未来1min ret,  该订单的存续时间(orderlifetime)， 未来1min同方向新增订单量，对手方新增订单量， 未来1min的成交量/成交金额。以及事件触发记作1否则为0的Dummy
+将上述指标按照：买方触发事件1为正，卖方触发事件1为负的原则，分别求围绕该事件的5min ewm_decay, 并把时间戳记作该事件后1min的时间戳（防止fowardlook）。
+请你帮我完成上述计算高频因子的python代码
+
+
+
+我的L3数据如下：
+ts	datetime	OrderID	px	sz	side	Msg	Orderlifttime	askpx1	bidpx1	askamt1	askvol1	askpx2	askamt2	askvol2	askpx3	askamt3	askvol3	askpx4	askamt4	askvol4	askpx5	askamt5	askvol5	bidamt1	bidvol1	bidpx2	bidamt2	bidvol2	bidpx3	bidamt3	bidvol3	bidpx4	bidamt4	bidvol4	bidpx5	bidamt5	bidvol5
+1.75311E+12	48:13.6				side=B,S	Msg=Trd, Add, Del, Replace		192.6	192.59	206891	5	192.62	582	6	192.63	1649	7	192.64	1107	8	192.65	1331	8	1663	8	192.58	590	5	192.57	1751	7	192.56	4937	13	192.55	2099	12
+1.75311E+12	48:24.5							192.6	192.59	201546	5	192.62	330	4	192.63	592	3	192.64	822	6	192.65	1672	9	1304	10	192.58	1201	8	192.57	1186	6	192.56	3067	13	192.55	6935	16
+1.75311E+12	48:35.2							192.6	192.59	198466	4	192.62	89	3	192.64	205	3	192.65	896	5	192.66	1478	8	7812	24	192.58	1424	7	192.57	2122	7	192.56	2312	9	192.55	3559	14
+
+请你给出简洁正确的python代码
+
+
+
+定义在买单价格在买1及以上,卖单在卖1及以下处，的订单单笔挂单金额超过昨日单笔成交金额平均值为事件1，
+
+计算事件1发生时： 买1量，卖1量，(BS1-AS1)/(BS1+AS1) , 未来1min ret,  该订单的存续时间(orderlifetime)， 未来1min同方向新增订单量，对手方新增订单量， 未来1min的成交量/成交金额。以及事件触发记作1否则为0的Dummy
+将上述指标按照：买方触发事件1为正，卖方触发事件1为负的原则，分别求围绕该事件的5min ewm_decay, 并把时间戳记作该事件后1min的时间戳（防止fowardlook）。
+请你帮我完成上述计算高频因子的python代码
+
+
+
+我的L3数据如下：
+ts	datetime	OrderID	px	sz	side	Msg	Orderlifttime	askpx1	bidpx1	askamt1	askvol1	askpx2	askamt2	askvol2	askpx3	askamt3	askvol3	askpx4	askamt4	askvol4	askpx5	askamt5	askvol5	bidamt1	bidvol1	bidpx2	bidamt2	bidvol2	bidpx3	bidamt3	bidvol3	bidpx4	bidamt4	bidvol4	bidpx5	bidamt5	bidvol5
+1.75311E+12	48:13.6				side=B,S	Msg=Trd, Add, Del, Replace		192.6	192.59	206891	5	192.62	582	6	192.63	1649	7	192.64	1107	8	192.65	1331	8	1663	8	192.58	590	5	192.57	1751	7	192.56	4937	13	192.55	2099	12
+1.75311E+12	48:24.5							192.6	192.59	201546	5	192.62	330	4	192.63	592	3	192.64	822	6	192.65	1672	9	1304	10	192.58	1201	8	192.57	1186	6	192.56	3067	13	192.55	6935	16
+1.75311E+12	48:35.2							192.6	192.59	198466	4	192.62	89	3	192.64	205	3	192.65	896	5	192.66	1478	8	7812	24	192.58	1424	7	192.57	2122	7	192.56	2312	9	192.55	3559	14
+
+请你给出简洁正确的python代码
