@@ -1,0 +1,291 @@
+Operator,# Args,Tags,Type,Authors,BDay,Description
+jcho_cs_norm(input),Unary,"Post processing, Cross sectional",global,jcho,20180705,Transform each cross section of the input to normal distribution.
+"jzhu_ind_rotation(var, industry, weight, norm=True)",Binary,"Relative value, Cross sectional",global,jzhu,20200528,This operator is used to calculate industry average and process normal post processing steps on the industry level.
+"jhuang_varyingsize(alpharaw,events,valids,neut_mat,meansize=1e6,events_lb=20,meansize_lb=252,poslimit=0.01)",,Event,global,jhuang,20200501,This operator will make the 'alpharaw' have varying booksize base on the number of 'events' in the past 'events_lb' days and keep the mean booksize of the past 'meansize_lb' days as 'meansize'.
+"syuan_cs_eigenvector_centrality(relation, sp=None, time=None, mode='raw', max_iter=100, tol=1.0e-6, norm=True, fill=True)",Unary,"Regression, Relative value, Time series",global,syuan,20200408,Conduct time series one-variable regression
+"syuan_cs_pagerank(relation, sp=None, time=None, mode='raw', alpha=0.85, max_iter=100, tol=1e-6, norm=True, fill=True)",Unary,"Regression, Relative value, Time series",global,syuan,20200408,Conduct time series one-variable regression.
+"ycai_indNeutAvgExcSelf(var, ind)",Binary,"Relative value, Cross sectional",global,ycai,20200413,This operator conducts industry neutralization of input variable var.
+"cxi_ts_linear_regress(x, y, shift, lookback)",Binary,"Regression, Time series",global,cxi,20190610,Linear regression operator for individual stock data.
+"cxi_ts_logit_regress(x, y, shift, lookback)",Binary,"Regression, Time series",global,cxi,20190610,Probit regression operator for dividiual stock data.
+"cxi_ts_probit_regress(x, y, shift, lookback)",Binary,"Regression, Time series",global,cxi,20190610,Logistic regression operator for dividiual stock data.
+"cxi_GroupMean(input, grouping)",,"Relative value, Cross sectional",global,cxi,20180912,Cross-sectional group mean operator.
+"tqio_ICA_binary(input1,input2)",Binary,"Combination, Cross sectional",global,tqiao,20171215,"Perform independent component analysis on a daily basis. tqio_ICA_binary  takes two variables everyday, viewing them (stockwise) as combination of independent nongaussian signals (only one is used in this specific operator) plus gaussian noises."
+"tqio_corr2index(var,index,lookback,var_delay=0,predict_var=False)",Binary,Relative value,global,tqiao,20171215,Calculates correlation between a variable and an index provided by user in time series domain. Index could be a leading factor. This function could also return the predicted value of var calculated based on the index value and its correlation to the variable.
+"ts_ann_last_year(input,dates,quarter_of_the_year)",,"Time series, Event",global,,,Find out the fundamental values for the same quarter last year
+"jzhu_jzhao_liquify(input,volume,close, pctg=0.2, n_day=3)",Unary,Post processing,global,"jzhu, jzhao",20180619,This operator is used to significantly increase the capacity of alpha
+"jzhu_flipper(input1,input2,input3, direction ='ts',method ='zscore',bias = 1)",Ternary,"Combination, Flipper",global,jzhu,20180529,This operator is use to switch between two alpha ideas based on certain conditions.
+"jzhu_tc_pca_multi(input, number)",Multi-input,Combination,global,jzhu,20171212,Find out the principal components of multiple variables each day and combine the important ones to make one data variable
+"jzhu_tc_hump_liquidity(input, ratio, volume, close)",Unary,Post processing,global,jzhu,20171206,Slow down the signal using the logic similar to tc_hump while increasing the liquidity and capacity at the same time
+"jzhu_FFT_keep_component(input, lookback, frequency, keep ='slow')",Unary,Time series,global,jzhu,20170815,Keep certain frequency components of a time series using Fast Fourier Transform.
+"jzhu_FFT_keep(input, lookback, frequency)",Unary,"Post processing, Time series",global,,,Slow the turnover of input matrix by using the Fast Fourier Transform
+"jzhu_ts_signed_logratio_divide_avg(input, lookback)",Unary,Time series,global,jzhu,20170811,Calculates the signed log ratio of the input variable over its average value for the past few days.
+"yl2151_threewaydecision(input1, input2)",Binary,Combination,global,yl2151,20190426,Improve the the original input1 by using the sign of another variable input2. It often find uncorrelated alphas compared with original one
+"yl2151_boost_cap(input, volume,close,industry)",Unary,Post processing,global,yl2151,20180530,"Boost the liquidity and capacity of an alpha, while keeps the most signal. Usually it can boost the capacity more than 4 times. This operator is very fast."
+"yl2151_jzhou_boost_liq(input1, volume,close,maxtrd,industry,valids)",Unary,Post processing,global,"yl2151, jzhou",20171208,"Boost the liquidity and capacity of an alpha, while keeps the most signal. Usually it can boost the capacity more than 4 times. This operator is very fast."
+"yl2151_fchen_ts_nearest_diff(input1, mode)",Unary,Time series,global,"yl2151, fchen",20171208,"Find the last different value on the time horizon and set the output as the difference or ratio, during the looking back windows."
+"jackwu_quick_cap_booster(alpha, volume, close, scale)",Unary,Post processing,global,jackwu,20180816,This operator is intended to increase the capacity / liquidity of alphas.
+"jackwu_liq_booster(alpha, volume, close, industry, vol20, scale)",Unary,Post processing,global,jackwu,20180205,This operator is intended to increase the capacity / liquidity of alphas.
+"jackwu_binary_norm(alpha1,alpha2,tendency=0,denoise=True)",Binary,Combination,global,jackwu,20171212,"This is a binary normalizing operator. Given 2 data variables, this operator normalizes the first data variable by using the information provided by the second data variable. The input alpha1 and alpha2 specifies two data variables. The input tendency specifies the tendency of using the information provided by alpha2 (0 means using no information of alpha2, positive means using information of alpha2, and negative means using information of -alpha2). The input denoise specifies whether you want to denoise the information."
+"jackwu_binary_fusion(alpha1,pctg1,alpha2,pctg2,tendency=0,denoise=True)",Binary,Combination,global,jackwu,20171212,"This operator combines two different signals together. The input alpha1 and alpha2 specifies the two signals. Based on alpha1 and alpha2, the input pctg1 and pctg2 specifies certain top/bottom percentage of stocks that you want to evaluate. The input tendency specifies the tendency of assigning weights base on alpha2. The input denoise specifies whether you want to denoise the signals."
+"jackwu_yyoo_jzhou_ind_avg_fast(input,industry_grouping,weight)",Binary,"Relative value, Cross sectional",global,"jackwu, jzhou, yyoo",20171208,"There is a lot of literature which documents alphas at the industry level. In fact a well known strategy is to rotate capital between different sectors: http://www.investopedia.com/terms/s/sectorrotation.asp. These industry wide signals can only be captured if we can compute the average value of different variables within stocks in the same industry. We can then compare the average values across different industries to decide how to form our portfolio.
+
+This operator is designed to calculate average value for each industries. The first input is the variable you want to calculate. The second is the industry classification variable. The third input is the weighting variable. For example, jackwu_yyoo_jzhou_ind_avg_fast(ret1,subindustry,1) calculates equally-weighted average return for each subindustries, while jackwu_yyoo_jzhou_ind_avg_fast(ret1,subindustry,close*shsout) calculates market-cap-weighted average return.
+
+Often these industry momentum signals are stronger in delay 0, in non-USA regions and with sector/market neutralization."
+"jackwu_dual(ret,ret_ind,ind,stock_pctg=0.5,subindustry_pctg=0.5,weight_method='dret',rank_method='within_group',weight_params=0)",Ternary,Combination,global,jackwu,20170906,"This operator combines short-term stock reversal and subindustry momentum (stronger in EU/JP, Sector/Market, Delay 0). It sorts stocks within each subindustries based on -ret, and then, it also sorts subindustries based on industry-average ret. Finally, by default, it longs the top 50% stocks in the top 50% subindustries, and vice versa."
+"jackwu_AnnResponse(input,trading_days_til_next_ann,ind,lookback=70)",Unary,"Earnings, Event",global,jackwu,20170906,"There are papers document the reaction of a stock's price related to earlier earning announcements of peer stocks.
+
+This operator will compute the cumulative value of the input around a user specified window in its peers' earnings announcement period.
+
+The first input is the variable whose values will be summed up. The second input must be variables that represent the number of days until earnings announcements (or some other event like dividend paydate). The third input is the industry classification. The fourth input is the lookback window.
+
+In the following example call, it first sums up the stock's return for the last five days only when there exist at least one stock in the same sector that are having earning announcements. Let's call it response return (a response for peer stocks' earning announcements). Then, this alpha assigns position based on negative response return 3 days before its own earning announcements, and assigns position based on response return 3 days after its own earning announcements."
+"jackwu_ts_corrs(input1,input2,days,condition,atnan2zero)",Ternary,,global,jackwu,20170817,"This operator allows you to calculate correlation between 2 variables differently by conditioning on certain restrictions.
+
+For example, there are papers that support downside beta is a better measure than market beta. The following alpha calculates the downside correlation between stock and SPX index, with a 21 lookback days: (downside means the market is down today, which is specified by ret1_SPX<0)"
+"jackwu_rank_industry(input,industry_grouping,method='min')",,,global,,,"This operator is designed to rank alpha within industries.
+
+The first input is the alpha you want to rank. The second is the industry classification variable. The third input is the ranking method."
+"jackwu_double_sort(primary_alpha,alternative_alpha)",Binary,"Combination, Relative value, Cross sectional",global,jackwu,20170811,"This operator is designed to double sort alphas. It first sorts stock based on the primary alpha. If the primary alpha has the same value, then it sorts stock based on the alternative alpha. When the primary alpha is discrete, it also helps to slow down the primary alpha.
+
+The first input is the primary alpha you want to bet on. The second input is the alternative alpha."
+"wdeng_ts_macd(input, lookback1, lookback2)",Unary,"Technical, Time series",global,wdeng,20170816,This operator calculates the moving average convergence divergence (MACD) of the input variable with the exponential moving average calculated in the specified lookback windows.
+"wdeng_ts_macd_signal(input, lookback1, lookback2, lookback_signal)",Unary,"Technical, Time series",global,wdeng,20170816,This operator calculates the moving average convergence divergence (MACD) signal of the input variable with the exponential moving average calculated in the specified lookback windows.
+"wdeng_ts_macd_histogram(input, lookback1, lookback2, lookback_signal)",Unary,"Technical, Time series",global,wdeng,20170816,This operator calculates the moving average convergence divergence (MACD) histogram of the input variable with the exponential moving average calculated in the specified lookback windows.
+"wdeng_ts_rsi(input, lookback)",Unary,"Technical, Time series",global,wdeng,20170821,This operator calculates the relative strength index (RSI) of the input variable in the specified lookback window.
+"wdeng_ts_zscore_x_days(input, lookback, x_days)",Unary,Time series,global,wdeng,20180102,This operator calculates the zscore of the input variable across the same kinds of days in the specified lookback window.
+"wdeng_ts_rank_x_days(input, lookback, x_days)",Unary,Time series,global,wdeng,20180102,This operator calculates the rank of the input variable across the same kinds of days in the specified lookback window.
+"wdeng_ts_median_x_days(input, lookback, x_days)",Unary,Time series,global,wdeng,20180102,This operator calculates the median of the input variable across the same kinds of days in the specified lookback window.
+"wdeng_ts_mean_x_days(input, lookback, x_days)",Unary,Time series,global,wdeng,20180102,This operator calculates the mean of the input variable across the same kinds of days in the specified lookback window.
+"wdeng_ts_std_x_days(input, lookback, x_days)",Unary,Time series,global,wdeng,20180102,This operator calculates the standard deviation of the input variable across the same kinds of days in the specified lookback window.
+"wdeng_ts_skew_x_days(input, lookback, x_days)",Unary,Time series,global,wdeng,20180102,This operator calculates the skewness of the input variable across the same kinds of days in the specified lookback window.
+"wdeng_ts_corr_binary_x_days(input1, input2, lookback, x_days)",Binary,Time series,global,wdeng,20180102,This operator calculates the stock level correlation of the two input variables across the same kinds of days in the specified lookback window.
+"jzhou_cxi_ts_zscore_overreact(input, tsz_lookback, ts_mean_exp_lookback, ts_mean_exp_decay, invert_scalar=1.2)",Unary,Time series,global,"jzhou, cxi",20190404,This operator is a variant of ts_zscore that will invert the positions of the z-score after the first day.
+"jzhou_ts_seasonal_returns(input,days_var,offset,window_length,num_repeats_to_avg)",Unary,"Time series, Seasonal",global,jzhou,20190320,Operator is designed to compute the average returns of a similar seasonal time period in the past.
+"jcho_jzhou_sparse_dot(input, relationship_var ,normalize_outgoing ,normalize_incoming ,transpose)",Binary,"Relative value, Cross sectional",global,"jcho, jzhou",20180822,This is a fast way to aggregate input values according to a relationship.
+"jzhou_lye_mulNMF([features],components,pos_transform=""logistic"")",,,global,jzhou,20180523,Calculates Non-Negative Matrix Factorization of input factors.
+"jzhou_lye_mulpca([features],components, preprocess=""normalized"",princompweight=""variance"")",,,global,jzhou,20180523,This operator calculates principal components of different input factors.
+"jzhou_prev_ann_avg(input,days_since_event,days_until_event,prev_event_start_idx,prev_event_window_length,curr_event_start_idx,curr_event_window_length)",Ternary,Event,global,jzhou,20170808,This operator will compute the average value of the input around a user specified window around the previous earnings announcement period. It will set alpha positions equal to this value for a user specified window around the current earnings announcement period.
+"jzhou_cs_indneut_keepsign(input,grouping_var)",Unary,"Relative value, Cross sectional",global,jzhou,20170803,The purpose of this operator is to preserve the sign of the input matrix while doing industry neutralization
+"tsingh_inc_capacity(input, shsout,close,valids,bcount)",Unary,"Post processing, Cross sectional",global,tsingh,20171208,Cross-sectional operation to increase liquidity for alpha exrpession
+"tsingh_group_zscore(input, valids, mygroup, thresh, fill_val)",,"Relative value, Cross sectional",global,tsingh,20171208,Cross-sectional zscore operation based on integer grouping matrix
+"tsingh_group_avgcorr(input, valids, mygroup, lookback, fill_val)",,"Relative value, Cross sectional",global,tsingh,20180103,Average correlation of each stock with all other stocks in the mygroup grouping array for lookback period
+"cshao_tsingh_ts_eventize_diff(input, degree, pct_thres, delay_days, delay_coef)",Unary,"Time series, Event",global,"cshao, tsingh",20180416,Event operator to capture signal for stocks where the degree diff value is higher than a threshold value
+"cshao_tsingh_ts_eventize(input, pct_thres, delay_days, delay_coef)",Unary,"Time series, Event",global,"cshao, tsingh",20180416,Event operator to capture signal for stocks where the return value of input data is higher than a threshold value.
+"cshao_tsingh_ts_eventize_ratio(input, x, pct_thres, delay_days, delay_coef)",Unary,Time series,global,"cshao, tsingh",20180416,Event operator to capture signal for stocks where the x degree difference in value when normalized by value x days ago is higher than a threshold value
+"yyoo_ts_fill(input1,ndays)",Unary,"Post processing, Time series",global,yyoo,20190401,Fill values up to certain days.
+"yyoo_pp_liq(input1,input2,order=1)",Binary,Post processing,global,yyoo,20171206,Improve liquidity and capacity of a signal.
+"yyoo_industry_std(input1,industry)",Binary,Cross sectional,global,yyoo,20170829,Calculate the cross-sectional standard deviation of alpha signals for each industry.
+"yyoo_hfang_ica_multi([f1, f2, f3])",Multi-input,Combination,global,"yyoo, hfang",20180129,Do independent component analysis for each factor
+"yyoo_factor_std(input1,input2,numgroups=10)",Binary,Cross sectional,global,yyoo,20170829,Calculate the cross-sectional standard deviation of alpha signals for each quantile factor.
+"yyoo_factor_mean(input1,input2,numgroups=10,weight=1)",Binary,"Relative value, Cross sectional",global,yyoo,20170829,"Calculate the cross-sectional average values of ""input1"" depending on ""input2"" groupings."
+"yyoo_decile(input, numgroups)",Unary,"Relative value, Cross sectional",global,yyoo,20170829,"Group stocks into quartiles, deciles, etc."
+"yyoo_cs_rank_percentile(input, method)",Unary,"Relative value, Cross sectional",global,yyoo,20170829,Calculate the cross-sectional percentile of values
+"yyoo_abansal_stochastic(high, low, close, lookback=20)",,"Technical, Time series",global,yyoo,20171212,Momentum indicator
+"yyoo_abansal_obv(close, volume, lookback=20)",,"Technical, Time series",global,yyoo,20171212,Calculate On Balance Volume (OBV)
+"yyoo_abansal_aroon(high, low, close, type = ""up"", lookback = 25)",,"Technical, Time series",global,yyoo,20171221,Calculate Aroon indicator
+"yyoo_abansal_adx(high, low, close, lookback=14)",,"Technical, Time series",global,yyoo,20171221,Calculate Average Directional Index (ADX)
+"yyoo_abansal_adl(close, high, low, volume, lookback=20)",,"Technical, Time series",global,yyoo,20171212,Calculate Accumulation Distribution Line indicator
+"fchen_ts_argmax(input, ndays)",Unary,Time series,global,fchen,20171127,Calculate how far away from the date of last max value to now in the past n days and set the output as the relative index of the max value.
+"fchen_ts_argmin(input, ndays)",Unary,Time series,global,fchen,20171127,Calculate how far away from the date of last min value to now in the past n days and set the output as the relative index of the min value.
+fchen_yl2151_days_since_last_update(input),Unary,Time series,global,"fchen, yl2151",20171208,calculate the number of trading days since the variable last update
+"fchen_jzhou_cs_sum_group(input, group)",Binary,"Relative value, Cross sectional",global,"fchen, jzhou",20171208,Compute the sum of input within specific group (e.g. industry or sector)
+"fchen_jzhou_cs_zscore_group(input, group)",Binary,"Relative value, Cross sectional",global,"fchen, jzhou",20171208,Compute  cross sectional z-score  of input within specific group (e.g. industry or sector)
+"fchen_cs_rank_group(input,group)",Binary,"Relative value, Cross sectional",global,fchen,20180601,Compute  cross sectional rank  of input within specific group (e.g. industry or sector)
+"fchen_ts_mean_season(input,lookback, interval)",Unary,"Time series, Seasonal",global,fchen,20180103,Calculate the mean of the specified variable by skipping over a set number of trading days each interval in the specified lookback window
+"fchen_ts_std_season(input,lookback, interval)",Unary,"Time series, Seasonal",global,fchen,20180103,Calculate the standard deviation of the specified variable  by skipping over a set number of trading days each interval in the specified lookback window
+"fchen_ts_skew_season(input,lookback, interval)",Unary,"Time series, Seasonal",global,fchen,20180103,Calculate the skewness of the specified variable by skipping over a set number of trading days each interval in the specified lookback window
+"fchen_yl2151_ts_zscore_season(input,lookback, interval)",Unary,"Time series, Seasonal",global,fchen,20180103,Calculate the  zscore  of the specified variable   by skipping over a set number of trading days each interval in the specified lookback window
+"fchen_yl2151_ts_rank_season(input,lookback, interval)",Unary,"Time series, Seasonal",global,fchen,20180103,Calculate the  rank  of the specified variable   by skipping over a set number of trading days each interval in the specified lookback window
+"fchen_ts_corr_binary_season(input1,input2,lookback, interval)",Binary,"Time series, Seasonal",global,fchen,20180103,Calculates the stock level correlation of the specified 2 variables by skipping over a set number of trading days each interval in the specified lookback window
+"fchen_relation_avg_fast(input,relation,weight,axis = 0)",Binary,"Relative value, Cross sectional",global,fchen,20180830,Calculate the average input value based on certain relatoinship
+"fchen_op_multi_relation(input,relation_list,logic = 'or',mode='avg', axis=0)",Multi-input,"Relative value, Cross sectional",global,fchen,20181218,Calculate the average of input value based on multi relatoinships if mode == 'avg'.
+"fchen_jhuang_ts_mean_remove_outlier(input,lookback,numofstd)",Unary,"Post processing, Time series",global,"fchen, jhuang_old",20181211,This operator is designed to replace values more than (numofstd * ts_std) away from ts_mean with nan in lookback days then calculate ts_mean.
+"fchen_jhuang_ts_mean_remove_max_min(input,lookback)",Unary,"Post processing, Time series",global,"fchen, jhuang_old",20181211,This operator is designed to remove max and min in  lookback days then calculate ts_mean.
+"cxi_ts_pcorr_binary(sigA, sigB, sigC, lookback)",Ternary,Time series,global,cxi,20190725,Partial correlation operator
+"ywu_ts_bbands(high, low, close, timeperiod=5, nbdevup=2, nbdevdn=2)",,,global,ywu,20190917,This operator calculates Bollinger Bands (BBANDS).
+"ywu_ts_macd(close, fastperiod=12, slowperiod=26, signalperiod=9)",Unary,"Technical, Time series",global,ywu,20190917,This operator calculates Moving Average Convergence/Divergence (MACD).
+"ywu_ts_stoch(high, low, close, fastk_period=5, slowk_period=3, slowd_period=3)",,"Technical, Time series",global,ywu,20190917,This operator calculates Stochastic Oscillator (STOCH).
+"syuan_ts_ols(x, y, days, out, norm_x=False, norm_y=False)",Binary,"Regression, Time series",global,syuan,20191021,Conduct time series one-variable regression.
+"tsingh_ssrivastava_ts_zscore_exp_perstock(input, days, weights)",Binary,Time series,global,tsingh,20201030,Compute exponentially weighted time-series zscore using different weight per stock per day
+"tsingh_ssrivastava_ts_mean_exp_perstock(input, days, weights)",Binary,Time series,global,"tsingh, ssrivastava, tsingh",20220627,Compute exponentially weighted time-series mean using different weight per stock per day
+"tsingh_ssrivastava_ts_corr_binary_exp_perstock(input1, input2, days, weights)",Ternary,Time series,global,tsingh,20201030,Compute exponentially weighted time-series correlation between two variables using different weight per stock per day
+"ssrivastava_tsingh_neut_avg(input, days, factors=None)",Unary,"Relative value, Post processing",global,ssrivastava,20201117,"Compute factor neutralized version of input with one default factor being ts_mean(input, days). More factors can be added using factors=[factor1, factor2, ...]"
+"hgupta_pp_none_doubleneut(input, universe, neut_group1, neut_group2, poslimit)",,,global,hgupta,20210616,Operator used to neutralize an input variable based on a unique matrix derived from two different groups eg industry and revere_hierarchy_50_all
+"hgupta_post_earnings(input, days, earnvar)",,,global,hgupta,20210616,Operator used to bet on an input variable after earning announcement.
+"hgupta_kkumar_ts_cmo(close, 21)",,,global,,,This operator calculates the Chande Momentum Oscillator (CMO) of the input variable in the specified lookback window.
+"kkumar_pgupta52_szhou_sujayv25_tpradhan_ts_ols(features_list, target, valids, rebalance_var=None, lookback=252)",,,global,kkumar,20210621,Operator used to compute the least-squares solution to a linear matrix equation.
+"pvardhan_kp_ne_mm_jh_ts_linear_regress(feature, target, lookback=20)",,,global,pvardhan,20210708,Operator used to bet on predicted target after stock wise univariate regression
+"jzhu_factor_prediction(factor, ret1, lookback)",,,global,jzhu,20210708,This operator calculates the factor return for the input variable and use the factor return to predict the stock return using linear regression
+"jzhu_set_tail_exposure(alpha, beta, exposure,direction=1)",,,global,jzhu,20210708,This operator sets the maximum / minimum exposure for certain factor to an exact amount
+"rbokam_ryadav_uprabhakar_cs_rank_mask(inp, target, lookback, lag, threshold, corr)",,,global,rbokam,20210708,We rank the variable followed by long and short operations on the top and bottom groups. We are only longing the positive predictors of forward biased targets and likewise shorting the negative predictors. Lag (=1) and lookback are used for calculating correlations and threshold is used for NaN masking middle values
+"sagarwal91_tpark_NoiseRemoval(input,lookback1,lookback2,exp_factor)",,,global,sagarwal91,20210708,Operator used to remove the noise (decrease std) from the variable or portfolio and thus increase ir
+"yunbo39_detrend(input,lookback)",,,global,yunbo39,20210708,Operator used to detrend an input variable
+"vkashyap_ameshram_jzhang_jzhou_ycai_mrevcorr_v2(var, group_var, corr_mode,bets_mode,thr,corr_lb,normalize,norm_mode,norm_lb,num_groups)",,,global,"vkashyap, jzhou, ameshram, jzhang, ycai",20210719,Operator used to bet on a group's/stock's reversion or momentum conditioned on a correlation measure.
+"akaran_MLR(feature,target,universe,days_since_first_trading_day_of_year,rf,lb)",,,global,akaran,20210720,This operator performs multivariate linear regression with multiple input features for a given target for each stock
+"tpradhan_ssrivastava_pca_residual(input, cov_window,close,shsout, mktcap_threshold, num_factors, drift)",,,global,"tpradhan, ssrivastava",20210720,Removes the strongest principal components of the input signal and bets on the mean reversion of the residual alpha
+"jhuang_pv_kp_ne_mm_double_sort_mode(inp1,inp2,lb=10,sort1='cs',sort2='cs',bins=2)",,,global,"jhuang, mmarinic, pvardhan, nelango52, kprakash",20210720,"This operator double sorts the inputs by binning the values. It first ts or cs sorts based on the first input, and then the sorted values are distributed into a number of buckets or bins. Within each bin, it sorts based on the cs or ts rank of the second input. It can track time series signals which the cs double sort can not."
+"pvardhan_kp_ne_mm_jh_ts_regress_bivariate_v1(feature1,feature2,target,lookback=20)",,,global,"pvardhan, mmarinic, jhuang, nelango52, kprakash",20210720,Operator used to bet on predicted target after stock wise bivariate regression 
+"ywu_zliu_sliang_hgupta_ts_factorneut(var, fac, days, target_exposure=0.)",,,global,,,Operator used to apply time-series factor neutralization.
+"zliu_hgupta_sliang_ywu_momentum_reversion_vix(input,ret_proxy,vix_proxy,lookback)",,,global,"zliu, sliang, hgupta, ywu",20210726,Operator used to decompose the signals to the momentum and reversion part and scale two parts according to the current market volatility
+"hgupta_sliang_ywu_zliu_longtermflipper1(inp1, inp2, th, lookback)",,,global,"hgupta, sliang, zliu, ywu",20210728,Operator used to flip an input1 variable based on long term performance of input2 variable.
+"sliang_ywu_zliu_hgupta_ts_exposure_condition(var, fac, days, thld)",,,global,"sliang, zliu, hgupta, ywu",20210728,The operator is used to compute time-series factor exposure using cosine similarity. Then masking the input variable with the factor exposure that exceeding the threshold value
+"sujayv25_kkumar_pgupta52_szhou_tpradhan_simstocks(features_list, return_var, valids, rebalance_var=None, lb=1)",,,global,"sujayv25, szhou, kkumar, tpradhan, pgupta52",20210728,Operator used to calculate average return weighted by the inverse of the pairwise euclidean distance of the input features for lookback window.
+"mhuang_zliu_return_forecast_vector_group_fast(alpha, ret_prox, group, ret_days=1, lookback = 126, t_threshold = 1.5, fast_mode_skip_days = 5)",,,global,mhuang,20210621,"Regress the feature to make return predictions with high t-values confidence in a group-wise fashion. Applicable to sparser features compared to zliu_xdu_mhuang_return_forecast_vector. In general, it generates signals with higher return than the original signals but with less liquidity, due to the selection of the model by t_threshold"
+"tpradhan_cgao_ts_linear_regression(feature_list, y, shift=1, mode=""OLS"", weights=None, lookback=22, refit=22, include_intercept=True)",,,global,tpradhan,20220215,"Operator used to do ordinary / weighted least  linear regression operator for every stock time series.
+
+Operator Schema
+
+tpradhan_cgao_ts_linear_regression(feature_list, y, shift=1, mode=""OLS"", weights=None, lookback=22, refit=22, include_intercept=True)
+
+Authors
+
+cgao90"
+"ycai_group_average(var, grpVar, avgExcludeSelf = False, digitizeVar = False, binNum = 10)",,,global,ycai,20230419,Compute group average of input var based on grpVar.
+at_nan2zero(A),Unary,Post processing,builtin,,,"Replace nonfinite values to zeros
+
+Returns in place np.nan_to_num(a), replacing np.nan and np.inf with zeros.  "
+at_zero2nan(A),Unary,Post processing,builtin,,,"Replace zeros to nans
+
+Returns a[a==0] = np.nan, replacing zeros with np.nan."
+at_signlog(A),Unary,Post processing,builtin,,,"Sign-preserving log1p transformation
+
+Returns in place np.sign(a) * np.log1p(np.abs(input))"
+at_signsqrt(A),Unary,,builtin,,,"Sign-preserving sqrt transformation
+
+Returns in place np.sign(a) * np.sqrt(np.abs(input)+1)"
+cs_rank(A),Unary,"Relative value, Cross sectional",builtin,,,"Assign rank to stock values every day
+
+Compute ranks and scale uniformly between 1 and 2 for convenience"
+cs_scale(A),Unary,"Relative value, Cross sectional",builtin,,,"Scale the data between 1 and 2
+
+Applies min-max scaling to the data each day and scale to 1 and 2: A[:,day] = 1 + (A[:,day] - np.nanmin(A[:,day])) / (np.nanmax(A[:,day]) - np.nanmin(A[:,day]))."
+cs_zscore(A),Unary,"Relative value, Cross sectional",builtin,,,"Normalize the data by centering and standardizing
+
+Computes the z-score of each stock data each day: A[:,day] = (A[:,day] - np.nanmean(A[:,day])) / np.nanstd(A[:,day])."
+"cs_remove_middle(A, filter_percentile)",Unary,"Post processing, Cross sectional",builtin,,,"Keep only the extreme cross-sectional values by removing the middle values
+
+Remove the filter_percentile of middle values among stocks each day"
+"cs_winsor(A, filter_percentile, remove_extreme)",Unary,"Post processing, Cross sectional",builtin,,,"Winsorizes or removes extreme values
+
+Sets extreme values to filter_percentile values or zeros"
+cs_harmonic_mean(A),Unary,Cross sectional,builtin,,,"Compute harmonic mean across all stocks every day
+
+Compute the cross-sectional harmonic mean each day:  A[:,day] = 1 / np.nanmean(1 / A[:,day]). "
+"cs_indneut(input, grouping)",Binary,"Relative value, Cross sectional",builtin,,,Returns a neutralized version of input data variable to grouping data variable.
+"cs_factorneut(input,[factor1,factor2],int_factors=[int_factor1,int_factor2])",Multi-input,"Relative value, Post processing, Cross sectional",builtin,,,"Neutralize the input variable to style factors (e.g. size, value, momentum)"
+"cs_booksize(input, booksize)",Unary,"Post processing, Cross sectional",builtin,,,Normalize positions of input portfolio such that the sum of all positive and negative positions sum to the same number everyday
+cs_shrink_balance(input),Unary,"Post processing, Cross sectional",builtin,,,Compute and compare the sum of all long positions to the sum of all short positions in a portfolio everyday. Shrink the size of the larger book such that it equals the smaller book size so that the portfolio is balanced.
+"cs_poslimit(input, pos_limit)",Unary,"Post processing, Cross sectional",builtin,,,This operator places an upper bound on the limit of the portfolio that can be allocated to any single stock
+"ts_corr_binary(A, B, days)",Binary,Time series,builtin,,,"Computes stock level correlation between two data variables
+
+Computes correlation between two data variables in the past days time points for each stock. "
+"ts_delay(A, days)",Unary,Time series,builtin,,,"Sets value today to the value days ago.
+
+Set each A[:,day] to A[:,day-days]. i.e. rolls the matrix along the time dimension: np.roll(A,days,1)"
+"ts_diff(A, n)",Unary,Time series,builtin,,,"Computes the n-th discrete difference along the time dimension
+
+The first difference is given by out[n] = A[n+1] - A[n] along the time axis, higher differences are calculated by using diff recursively e.g. ts_diff(input,2) = ts_diff(ts_diff(input,1),1)."
+ts_fill(A),Unary,Time series,builtin,,,"Forward fill the data
+
+Iterate through all days and replace nans today with previous day's values"
+"ts_harmonic_mean(A, days)",Unary,Time series,builtin,,,"Harmonic mean of the data in the last days
+
+Compute the harmonic mean in the past days each day"
+"ts_mean(A, days)",Unary,Time series,builtin,,,"Mean in the past days
+
+Compute the mean value in the past days each day"
+"ts_mean_exp(A, days, exp_factor)",Unary,Time series,builtin,,,"Exponentially weighted average in the past days
+
+Compute the exponentially weighted average value in the past days each day"
+"ts_median(A, days)",Unary,Time series,builtin,,,"Nanmedian of values in the past days
+
+Compute the median in the past days each day, ignoring nans"
+"ts_max(A, days)",Unary,Time series,builtin,,,"Maximum in the past days
+
+Compute the maximum value in the past days each day"
+"ts_min(A, days)",Unary,Time series,builtin,,,"Nanmin of values in the past days
+
+Compute the min in the past days each day, ignoring nans"
+"ts_sum(A, days)",Unary,Time series,builtin,,,"Cumulative sum in the past days
+
+Compute the sum of all finite values in the past days"
+"ts_rank(A, days)",Unary,Time series,builtin,,,"Assign rank to today's value within past days
+
+Compute ranks across the time series and scale uniformly between 1 and 2 for convenience"
+"ts_skew(A, days)",Unary,Time series,builtin,,,Compute the skewness of the finite values in the last days
+"ts_std(A, days)",Unary,Time series,builtin,,,Compute the standard deviation of the finite values in the last days
+"ts_norm(A, days)",Unary,Time series,builtin,,,"Center data with the average value in the past days
+
+Scales the data by dividing by the average value: A[:,day] /= np.nanmean(A[:,day-days:day])"
+"ts_std_normalized(A, days)",Unary,Time series,builtin,,,"Standardize today's values
+
+Divides today's value by the standard deviation of the finite values in the last days"
+"ts_zscore(A, days)",Unary,Time series,builtin,,,Normalize today's values by centering and standardizing
+"op_vmcont(input, universe, close, vol20, maxtrd=0.03, maxpos=0.3)",,,builtin,,,This operator constraints the amount that the input portfolio can trade per day based off of the average daily notional traded per stock.
+"op_locate(input, locates, rebates, close, locate_utilization_rate, max_rebate_rate)",,,builtin,,,This operator accounts for the availability and cost of borrowing stocks. Returns a portfolio for which we can get the short positions.
+"jzhou_tpark_neb_flipper(input,cond_var,lookback,threshold,invert_flag)",Binary,Flipper,global,"jzhou, tpark",20210312,Operator used to invert portfolio when concentration of conditioning variable is increasing or decreasing
+"nelango52_pv_kp_jh_ne_mm_ts_factorneut(input,neut_mat,lb)",Binary,Time series,global,nelango52,20210615,Operator used to neutralize input with the neut_mat on time axis
+"jzhou_tpark_cxi_autocorr(input,lookback)",Unary,Flipper,global,"jzhou, tpark, cxi",20210309,Operator used to compute and bet on the autocorrelation of an input variable within some lookback
+"jzhou_tpark_fchen_intradayvolaflipper(input,cond_var,threshold)",,Earnings,global,"jzhou, tpark, fchen",20210308,Operator used to flip an input variable based on the cross sectional z-score of a conditional var
+"jzhou_tpark_jackwu_flipretstd(input,return_var,std_lookback,zscore_lookback)",Binary,Earnings,global,"jzhou, tpark, jackwu",20210308,Operator used to flip an input variable or portfolio based on increasing or decreasing volatility computed using a return variable
+"jzhou_tpark_edgar8k901_flipper(input,filing_var,hold_days)",Binary,"Flipper, Event",global,"jzhou, tpark",20210310,Operator used to flip an input variable when an event occurs
+"jzhou_tpark_volume_flipper(input,volume_var,lookback,threshold)",Binary,Flipper,global,jzhou,20210309,Operator used to flip an input variable based on volume
+"jzhou_tpark_fchen_avgcorr_flipper(input,corr_var,threshold)",Binary,"Relative value, Flipper",global,"jzhou, tpark, fchen",20210309,Operator used to flip an input variable based on average pairwise correlation of stock
+"kprakash_pv_jh_ne_mm_double_sort_bin(alpha1,alpha2,bins)",Binary,"Relative value, Cross sectional",global,kprakash,20210615,"This operator is designed to double sort alphas by binning the values. It first sorts stock based on the primary alpha, and then the sorted values are distributed into a number of buckets or bins. For each bin, it sorts stock based on the alternative alpha.
+The first input is the primary alpha you want to bet on. The second input is the alternative alpha."
+"jzhou_tpark_tszret_flipper(input,return_var,lookback,threshold)",Binary,"Time series, Flipper",global,"jzhou, tpark",20210310,Operator used to flip an input variable based on acceleration or deceleration of returns
+"jzhou_tpark_cxi_group_leadlag(input,group,lookback,threshold)",Binary,Relative value,global,"jzhou, tpark, cxi",20210309,Lead-lag operator. Computes correlation between stock input variable value and group average input variable value within some lookbacks. Leaders defined as stocks with high correlation between stock value today and group value tomorrow. Laggers defined as stocks with higher correlation between group value today and stock value tomorrow. Bet on input for laggers and -input for leaders.
+"jzhou_tpark_fchen_dayofmonthflipper(input,days_since_var,days_til_var,threshold_days)",Ternary,"Earnings, Seasonal",global,"jzhou, tpark, fchen",20210308,Operator used to flip an input variable or portfolio based on proximity to or from an event
+"jzhou_tpark_dayssinceannflipper(input,days_since_var,threshold_days)",Binary,"Earnings, Event",global,"jzhou, tpark",20210308,Operator used to flip an input variable or portfolio based on proximity to or from an event
+"jzhou_tpark_news_flipper(input,news_var,lookback,threshold)",Binary,"Flipper, Event",global,jzhou,20210309,Operator used to flip an input variable based on news volume
+"jzhou_tpark_fchen_mktcapflipper(input,shsout_var,close_var,threshold)",,Earnings,global,"jzhou, tpark, fchen",20210308,Operator used to flip an input variable based on market capitalization of a stock
+"akaran_HPCA(var,group,universe,days_since_first_trading_day_of_year,rf,lb,wt=1.0,num_vec=1,eig_val_weighted=False)",Ternary,"Combination, Relative value",global,akaran,20210609,Hierarchical Principal Components Analysis. Returns the first n (num_vec) principal components computed from a noise reduced Covariance matrix built using group (industry/subindustry/sector/etc.) information. (Link to paper: https://arxiv.org/pdf/2010.04140.pdf)
+"pvardhan_kp_jh_ne_mm_corr_flipper(corr_var,input,lookback=252)",Binary,Flipper,global,pvardhan,20210615,Operator used to flip an input variable based on corr_var’s correlation to its 1-day delayed version.
+"wdeng_ts_ret_abs_atan(input, lookback)",Unary,Time series,global,wdeng,20210609,"This operator calculates the return, i.e., the relative change, compared to the value N days ago, where N is specified by the lookback argument, for the input variable/portfolio, with modifications to handle 2 special cases where a simple calculation ""input/ts_delay(input,N)-1"" may give an unintended result:
+1. When the value N days ago is negative, for example, a stock's EPS changes from -1 to 1, which should be good news, the simple calculation mentioned above gives a negative number. This operator, however, gives a positive number in this case. And in general, this operator's output sign is always consistent with the input change direction.
+2. When the value N days ago is very close to 0, for example, a stock's EPS changes from 0.01 to 1, the simple calculation mentioned above gives a large number that may cause unintended position concentration in the output portfolio. This operator, however, uses a soft cap (atan function) to cap the output to be in the range of (-pi, pi)."
+"hgupta_kkumar_ts_trix(input,lookback)",Unary,Technical,global,,,This operator calculates the Triple Exponential Average (TRIX) of the input variable in the specified lookback window.
+"ctseng_wdeng_ryadav_mhuang_extract_component(input, factors, exposure_factors, last_N_days=None, mode='cs_rank')",Multi-input,Relative value,global,ctseng,20210614,"Operator used to extract components of certain factors. For example,
+it can be used to extract momentum components of any expressions."
+"jzhou_tpark_jackwu_flipabscloseratio(input,price_var,lookback)",Binary,Earnings,global,"jzhou, tpark, jackwu",20210308,Operator used to flip an input variable or portfolio based on increasing or decreasing volatility as computed on a price variable
+"zliu_xdu_mhuang_return_forecast_vector(preA, ret1, lookback = 126, tvalue_thres = 1.5) ",Binary,"Regression, Time series",global,zliu,20210602,Regress the feature to make return predictions with high t-values confidence.
+"jzhou_tpark_shortsqueeze(input, shortint_var, per_thres)",Binary,Post processing,global,"jzhou, tpark",20210309,Operator used to zero out bets of input portfolio for high short interest stocks
+"akaran_Pairs_Trading(factor,days_since_first_trading_day_of_year,rf=63,lb=252,corr_pairs=0.75,tlr=2)",Unary,"Relative value, Cross sectional",global,akaran,20210614,The operator identifies pairs based on input and takes position in stocks on the hypothesis that they will revert to mean. The pairs are identified on the basis of the correlation of the input variable factor.
+"jzhou_tpark_VIX_flipper(input,idx_input,lookback,threshold)",Binary,"Relative value, Flipper",global,"jzhou, tpark",20210310,Operator used to flip an input variable based on increasing or decreasing macro index values
+"jzhou_tpark_fchen_mornaftervolmflipper(input,numerator_var,denominator_var,ratio_threshold)",Ternary,Earnings,global,"jzhou, tpark, fchen",20210308,Operator used to flip an input variable or portfolio based on the ratio value between two different variables
+"jzhou_tpark_tsskewret_flipper(input,return_var,lookback,threshold)",Binary,"Time series, Flipper",global,"jzhou, tpark",20210310,Operator used to flip an input variable based on skewness of returns
+"jzhou_tpark_jackwu_SPYcorr_flipper(input,idx_input,lookback)",Binary,"Relative value, Flipper",global,"jzhou, tpark, jackwu",20210309,Operator used to flip an input variable based on correlation with an index variable
+"jzhou_tpark_univentryexit(input_var, cond_var, per_thres_entry, entry_exit_buffer_thres, invert_cond_var)",Binary,,global,jzhou,20210317,Operator used to condition bets of input portfolio on cross sectional rank of conditioning variable. A spread between entry and exit conditions is imposed to minimize flickering into and out of valid universe.
+"jzhou_tpark_jackwu_mornaftervolmcorr(input,morning_var,afternoon_var,lookback)",Ternary,Flipper,global,"jzhou, tpark, jackwu",20210310,Operator used to bet on correlation between input and spread between two intraday variables
+"wdeng_ts_scale(input, lookback)",Unary,Time series,global,wdeng,20210609,"This operator takes in a numstocks x numdates 2D matrix, and scales every matrix element to be between 1 and 2 based on the element's relative position in its historical range in the lookback period. A value equaling the minimum value in the lookback period will be scaled to 1. A value equaling the maximum value in the lookback period will be scaled to 2. Other values will be scaled proportionally."
+"jzhou_tpark_dayofweekflipper(input,day_of_the_week,days_threshold)",Binary,"Earnings, Seasonal",global,"jzhou, tpark",20210308,Operator used to flip an input variable or portfolio based on proximity to or from an event
+"jzhou_tpark_tszretmorn_flipper(input,return_morning_var,lookback,threshold)",Binary,"Time series, Flipper",global,"jzhou, tpark",20210310,Operator used to flip an input variable based on increasing or decreasing return morning
+"k, b, y_hat, e = cxi_ts_detrend(sig, lookback)",Unary,"Regression, Time series",global,cxi,20190917,"Detrend operator in time series, which is subtracting a best-fit line (in the least-squares sense) from your data."
+"cokurtosis = cxi_ts_cokurtosis(sigA, sigB, lookback, type=0)",Ternary,Time series,global,cxi,20190917,Co-kurtosis operator in time series.
+"coskewness = cxi_ts_coskewness(sigA, sigB, sigC, lookback)",Ternary,Time series,global,cxi,20190917,Co-skewness operator in time series.
+"alpha =ctseng_make_excess_var_USA(var, barra_volatility, barra_momentum,barra_size, barra_sizenonl, barra_tradeact, barra_growth,barra_earnyld, barra_value, barra_earnvar, barra_leverage,barra_currsen, barra_yield, barra_nonestu, barra_ind1_id,barra_ind2_id, barra_ind3_id, barra_ind4_id, barra_ind5_id,barra_ind1_rev, barra_ind2_rev, barra_ind3_rev, barra_ind4_rev,barra_ind5_rev)",,,global,ctseng,20220218,"An operator used to make an excess version of a certain alpha
+expression. For example, it can be used to make ret1_excess from ret1."
+"alpha =ctseng_make_excess_var_EU(var, barra_beta, barra_momentum,barra_resvol, barra_size, barra_earnyild, barra_btop, barra_divyild,barra_liquidty, barra_sizenl, barra_leverage, barra_growth, barra_ind,barra_country, barra_isocurr, barra_market)",,,global,ctseng,20220218,"An operator used to make an excess version of a certain alpha
+expression. For example, it can be used to make ret1_excess from ret1."
+"alpha =ctseng_make_excess_var_ASIA(var, barra_strevrsl, barra_beta,barra_nk225, barra_size, barra_resvol, barra_liquidty, barra_momentum,barra_sizenl, barra_leverage, barra_value, barra_macrosen,barra_ltrevrsl, barra_forgnsen, barra_sentimnt, barra_earnyld,barra_managmnt, barra_indmom, barra_growth, barra_quality,barra_prospect, barra_ind1_id, barra_ind2_id, barra_ind3_id,barra_ind4_id, barra_ind5_id, barra_ind1_rev, barra_ind2_rev,barra_ind3_rev, barra_ind4_rev, barra_ind5_rev,barra_country)",,,global,ctseng,20220218,"An operator used to make an excess version of a certain alpha
+expression. For example, it can be used to make ret1_excess from ret1."
+"zliu_szhou_yl2151_imajer_rkumar75_trading_days_count_clean(event_var, all_busdays, dates)",,Event,global,"zliu, yl2151, zliu, szhou, imajer, rkumar75",20230411,"This operator generates the trading days variables from the future event happening dates. We have some future event dates variables that cannot be directly used in alpha generation, like the following one in the future spaces:
+
+                raise Exception(re_econ_US_Initial_Jobless_Clm_NextDate[-20:])
+                Exception: [ 0 20181213 20181213 0 0 20181220 20181220 0
+                0 0 20181227 20181227 0 0 0 20190103
+                20190103 0 0 20190110]
+
+To make it useful to make alphas, we would need to transfer it to be the format with trading days type variables that would indicate how many trading days are between the current date and the future date. By calling the operator, we would get the following counts of the trading days:
+
+raise Exception(zliu_szhou_yl2151_imajer_rkumar75_trading_days_count_clean(re_econ_US_Initial_Jobless_Clm_NextDate, busdays
+_fut, dates)[-20:])
+Exception: [0 3 2 1 0 4 3 2 1 0 4 3 2 1 0 3 2 1 0 3]
+"
+"snarang73_ts_cci(input_data,days,cci_constant)",,Time series,global,snarang73,20230328,"The Commodity Channel Index (CCI) is a technical analysis indicator that is used to help identify overbought and oversold conditions in financial markets. The CCI operator calculates the difference between the current price of an asset and its average price over a specified period of time. The CCI operator can be used on a variety of financial data, including stocks, commodities, and currencies. It is particularly useful in volatile markets where price fluctuations can be significant. Traders can use the CCI to identify potential buying and selling opportunities.                                                              
+When the CCI value is above zero, it indicates that the asset is in an uptrend and when the CCI value is below zero, it indicates a downtrend. Traders can also look for divergences between the CCI and price movement to identify potential trend reversals.       
+This operator calculates the commodity channel index of a given time series data variable.                                         
+"
+"yyoo_corr_relation(ret1_excess,ret1,days_until_last_trading_day_of_month==0,top3000,lb=252,thres=0.5,is_percentile=True)",Multi-input,"Relative value, Cross sectional",global,yyoo,20231202,The operator tries to capture correlation-based relationship momentum signals.
+"hgupta_earnings_return(close, trading_days_til_next_ann, fs_next_ann_time <= 1500, from_ = '0days_after', to_ = '1days_after', lookback=5, numevents=1, agg_func=np.nansum, hold=-1)",Binary,"Technical, Time series, Seasonal, Event",global,hgupta,20240402,"Operator used to calculate returns surrounding earnings or any specified event, offering flexibility to analyze multiple events and aggregate their impact. This operator facilitates computation of both price returns and volume returns."
